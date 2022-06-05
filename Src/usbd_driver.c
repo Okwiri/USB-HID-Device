@@ -2,7 +2,7 @@
  * usbd_driver.c
  *
  *  Created on: May 21, 2022
- *      Author: user
+ *      Author: Oki Agaya Okwiri
  */
 #include "usbd_driver.h"
 #include "usb_standards.h"
@@ -127,7 +127,7 @@ static void write_packet(uint8_t endpoint_number , void const *buffer, uint16_t 
 	USB_OTG_INEndpointTypeDef *in_endpoint = IN_ENDPOINT(endpoint_number);
 
 	//Configure the transmission (1 Packet of size bytes)
-	MODIFY_REF(in_endpoint->DIEPTSIZ,
+	MODIFY_REG(in_endpoint->DIEPTSIZ,
 			USB_OTG_DIEPTSIZ_PKTCNT | USB_OTG_DIEPTSIZ_XFRSIZ,
 			_VAL2FLD(USB_OTG_DIEPTSIZ_PKTCNT, 1) | _VAL2FLD(USB_OTG_DIEPTSIZ_XFRSIZ, size)
 			);
@@ -170,7 +170,7 @@ static void reconfigure_fifo_start_addresses()
 	{
 		MODIFY_REG(USB_OTG_FS->DIEPTXF[tx_fifo_number],
 						USB_OTG_DIEPTXF_INEPTXSA,
-						_VAL2LFD(USB_OTG_DIEPTXF_INEPTXSA,start_address)
+						_VAL2FLD(USB_OTG_DIEPTXF_INEPTXSA,start_address)
 				);
 
 
@@ -214,7 +214,7 @@ static void configure_txfifo_size(uint8_t endpointnumber, uint16_t size)
 
 		MODIFY_REG(USB_OTG_FS->DIEPTXF[endpointnumber-1],
 				USB_OTG_DIEPTXF_INEPTXFD,
-				_VAL2LFD(USB_OTG_DIEPTXF_INEPTXFD,size)
+				_VAL2FLD(USB_OTG_DIEPTXF_INEPTXFD,size)
 		);
 	}
 	reconfigure_fifo_start_addresses();

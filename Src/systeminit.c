@@ -1,7 +1,7 @@
 /*System Initialization functions
  * Contains code to configure clocks
  *
- * Author : Oki Agaya Okeiri
+ * Author : Oki Agaya Okwiri
  */
 #include <stdint.h>
 #include "system_stm32f4xx.h"

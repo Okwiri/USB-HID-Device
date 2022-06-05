@@ -8,6 +8,9 @@ int main(void)
 
 	log_info("Program Entry Point");
 	usbd_initialize();
-	for(;;);
+	for(;;)
+	{
+		usbd_poll();
+	}
 
 }
